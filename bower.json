@@ -1,0 +1,17 @@
+{
+  "name": "purescript-miniyampa",
+  "moduleType": [
+    "node"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-arrows": "~0.6.1",
+    "purescript-refs": "~0.2.0",
+    "purescript-tailrec": "~0.3.1"
+  }
+}
