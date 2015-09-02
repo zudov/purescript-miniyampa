@@ -13,6 +13,8 @@ import Data.Maybe
 import Data.Functor
 import Data.Monoid
 import Data.Tuple
+import Data.AdditiveGroup
+import Data.VectorSpace
 import Data.Profunctor
 import Data.Profunctor.Strong
 
@@ -94,14 +96,15 @@ accumHoldBy op init = SF (accumHoldBySF init)
     accumHoldBySF s dt (Event x) = { sf: SF (accumHoldBySF sNext), output: sNext }
       where sNext = op s x
 
-integral :: SF Number Number
-integral = imIntegral 0.0
+integral :: forall a. (AdditiveGroup a, VectorSpace a Number) => SF a a
+integral = imIntegral zeroV
 
-imIntegral :: Number -> SF Number Number
+imIntegral :: forall a. (AdditiveGroup a, VectorSpace a Number) => a -> SF a a
 imIntegral init = SF (integralF init)
   where
     integralF acc dt x = { sf: SF (integralF res), output: acc }
-      where res = acc + dt * x
+      where
+          res = acc ^+^ (x ^* dt)
 
 time :: forall a. SF a Time
 time = constant 1.0 >>> integral

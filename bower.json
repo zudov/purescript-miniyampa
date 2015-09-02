@@ -12,6 +12,7 @@
   "dependencies": {
     "purescript-arrows": "~0.6.1",
     "purescript-refs": "~0.2.0",
-    "purescript-tailrec": "~0.3.1"
+    "purescript-tailrec": "~0.3.1",
+    "purescript-vector-space": "#d20501c"
   }
 }
